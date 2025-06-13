@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="text-center">
+  <h1 class="display-4 mt-4 text-success">🌿 Welcome to Plant Disease Detector 🌿</h1>
+  <p class="lead mt-3">
+    Your smart assistant for identifying plant diseases using AI.
+  </p>
+  <p>
+    Upload a photo of a plant leaf and get instant disease detection along with useful treatment suggestions.
+  </p>
+  <img src="{{ url_for('static', filename='images/plant_intro.jpg') }}" alt="Plant" class="img-fluid rounded shadow" style="max-width: 400px; margin: 20px 0;">
+  <br>
+  <a href="{{ url_for('index') }}" class="btn btn-primary">Start Detection</a>
+</div>
+{% endblock %}
