@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="mb-4">🌿 Plant Disease Detection</h1>
+
+    <h4>Upload a Leaf Image</h4>
+    <form id="predict-form" method="POST" action="/predict" enctype="multipart/form-data" class="mb-4">
+        <input type="file" name="file" required class="form-control mb-2">
+        <button type="submit" class="btn btn-success">Predict</button>
+    </form>
+</div>
+
+{% if error %}
+<div class="alert alert-danger mt-3">{{ error }}</div>
+{% endif %}
+
+
+{% if prediction %}
+
+<div class="result-container">
+    <div class="image-container">
+        <img src="{{ image_path }}" alt="Predicted Leaf" class="leaf-image" />
+    </div>
+    <div class="solution-text">
+        <h2>Prediction: {{ prediction }}</h2>
+        {% if 'Error' in solution[0] %}
+            <h5 class="text-danger text-break">⚠️ {{ solution[0] }}</h5>
+        {% else %}
+            <h3><strong>Solution:</strong></h3>
+            <ol class="solution-list">
+                {% for point in solution %}
+                    <li>{{ point }}</li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+    </div>
+</div>
+
+<!-- 🔥 Add this to show errors if they exist -->
+{% if error %}
+<div class="alert alert-danger mt-2">
+    {{ error }}
+</div>
+{% endif %}
+
+<!-- ✅ New Prediction Button -->
+<div class="text-center mt-4">
+    <button onclick="location.href='/'" class="btn btn-primary">New Prediction</button>
+</div>
+{% endif %}
+
+{% endblock %}
